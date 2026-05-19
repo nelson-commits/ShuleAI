@@ -143,7 +143,7 @@
     </div>
 
     <script>
-      const ALLOWED_ADMIN_EMAILS ="shuleaiadmin@memeyai.com" ;
+      const ALLOWED_ADMIN_EMAIL ="shuleaiadmin@memeyai.com" ;
       const ADMIN_SECRET ="shuleai_admin_key"; // Should match your .env ADMIN_SECRET
       async function login(event) {
         event.preventDefault();
@@ -157,7 +157,7 @@
 
         try {
           // Validate admin email and key
-          if (ALLOWED_ADMIN_EMAILS.includes(adminEmail) && adminKey === ADMIN_SECRET) {
+          if (isEmailValid && isSecretValid) {
             // Save admin credentials
             localStorage.setItem("admin_token", btoa(adminKey));
             localStorage.setItem("admin_email", adminEmail);
@@ -167,7 +167,7 @@
             window.location.href = "admin-dashboard.html";
           } else {
             // Show error for invalid credentials
-            if (!ALLOWED_ADMIN_EMAILS.includes(adminEmail) {
+            if (adminEmail !== AUTHORIZED_ADMIN_EMAIL) {
               errorElement.textContent =
                 "Unauthorized email. Only shuleaiadmin@memeyai.com";
             } else {
